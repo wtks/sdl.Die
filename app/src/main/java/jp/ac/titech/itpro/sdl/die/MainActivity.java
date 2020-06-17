@@ -2,21 +2,33 @@ package jp.ac.titech.itpro.sdl.die;
 
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SeekBar;
+import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
+public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, Runnable {
     private final static String TAG = MainActivity.class.getSimpleName();
+
+    private final static long DELAY = 50;
 
     private GLSurfaceView glView;
     private SimpleRenderer renderer;
 
     private Cube cube;
     private Pyramid pyramid;
+
+    private SeekBar seekBarX;
+    private SeekBar seekBarY;
+    private SeekBar seekBarZ;
+    private ToggleButton buttonX;
+    private ToggleButton buttonY;
+    private ToggleButton buttonZ;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +37,9 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         setContentView(R.layout.activity_main);
 
         glView = findViewById(R.id.gl_view);
-        SeekBar seekBarX = findViewById(R.id.seekbar_x);
-        SeekBar seekBarY = findViewById(R.id.seekbar_y);
-        SeekBar seekBarZ = findViewById(R.id.seekbar_z);
+        seekBarX = findViewById(R.id.seekbar_x);
+        seekBarY = findViewById(R.id.seekbar_y);
+        seekBarZ = findViewById(R.id.seekbar_z);
         seekBarX.setMax(360);
         seekBarY.setMax(360);
         seekBarZ.setMax(360);
@@ -35,6 +47,11 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         seekBarY.setOnSeekBarChangeListener(this);
         seekBarZ.setOnSeekBarChangeListener(this);
 
+        buttonX = findViewById(R.id.seekbar_x_button);
+        buttonY = findViewById(R.id.seekbar_y_button);
+        buttonZ = findViewById(R.id.seekbar_z_button);
+
+        handler = new Handler();
         renderer = new SimpleRenderer();
         cube = new Cube();
         pyramid = new Pyramid();
@@ -47,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         super.onResume();
         Log.d(TAG, "onResume");
         glView.onResume();
+        handler.postDelayed(this, DELAY);
     }
 
     @Override
@@ -54,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         super.onPause();
         Log.d(TAG, "onPause");
         glView.onPause();
+        handler.removeCallbacks(this);
     }
 
     @Override
@@ -98,5 +117,31 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
+    }
+
+    @Override
+    public void run() {
+        if (buttonX.isChecked()) {
+            if (seekBarX.getProgress() >= 360) {
+                seekBarX.setProgress(0);
+            } else {
+                seekBarX.incrementProgressBy(1);
+            }
+        }
+        if (buttonY.isChecked()) {
+            if (seekBarY.getProgress() >= 360) {
+                seekBarY.setProgress(0);
+            } else {
+                seekBarY.incrementProgressBy(1);
+            }
+        }
+        if (buttonZ.isChecked()) {
+            if (seekBarZ.getProgress() >= 360) {
+                seekBarZ.setProgress(0);
+            } else {
+                seekBarZ.incrementProgressBy(1);
+            }
+        }
+        handler.postDelayed(this, DELAY);
     }
 }

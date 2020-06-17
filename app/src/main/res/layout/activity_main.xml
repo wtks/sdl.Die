@@ -16,15 +16,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/seekbar_x_label"
+    <ToggleButton
+        android:id="@+id/seekbar_x_button"
         android:layout_width="@dimen/seekbar_label_width"
         android:layout_height="@dimen/seekbar_height"
         android:layout_margin="@dimen/margin"
-        android:gravity="center"
-        android:text="@string/seekbar_x_label"
+        android:checked="false"
+        android:textOff="@string/seekbar_x_label"
+        android:textOn="@string/seekbar_x_label"
         android:textSize="@dimen/seekbar_label_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/seekbar_y_label"
+        app:layout_constraintBottom_toTopOf="@+id/seekbar_y_button"
         app:layout_constraintStart_toStartOf="parent" />
 
     <SeekBar
@@ -34,17 +35,18 @@
         android:layout_margin="@dimen/margin"
         app:layout_constraintBottom_toTopOf="@+id/seekbar_y"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/seekbar_x_label" />
+        app:layout_constraintStart_toEndOf="@+id/seekbar_x_button" />
 
-    <TextView
-        android:id="@+id/seekbar_y_label"
+    <ToggleButton
+        android:id="@+id/seekbar_y_button"
         android:layout_width="@dimen/seekbar_label_width"
         android:layout_height="@dimen/seekbar_height"
         android:layout_margin="@dimen/margin"
-        android:gravity="center"
-        android:text="@string/seekbar_y_label"
+        android:checked="false"
+        android:textOff="@string/seekbar_y_label"
+        android:textOn="@string/seekbar_y_label"
         android:textSize="@dimen/seekbar_label_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/seekbar_z_label"
+        app:layout_constraintBottom_toTopOf="@+id/seekbar_z_button"
         app:layout_constraintStart_toStartOf="parent" />
 
     <SeekBar
@@ -54,15 +56,16 @@
         android:layout_margin="@dimen/margin"
         app:layout_constraintBottom_toTopOf="@+id/seekbar_z"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/seekbar_y_label" />
+        app:layout_constraintStart_toEndOf="@+id/seekbar_y_button" />
 
-    <TextView
-        android:id="@+id/seekbar_z_label"
+    <ToggleButton
+        android:id="@+id/seekbar_z_button"
         android:layout_width="@dimen/seekbar_label_width"
         android:layout_height="@dimen/seekbar_height"
         android:layout_margin="@dimen/margin"
-        android:gravity="center"
-        android:text="@string/seekbar_z_label"
+        android:checked="false"
+        android:textOff="@string/seekbar_z_label"
+        android:textOn="@string/seekbar_z_label"
         android:textSize="@dimen/seekbar_label_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -74,6 +77,6 @@
         android:layout_margin="@dimen/margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/seekbar_z_label" />
+        app:layout_constraintStart_toEndOf="@+id/seekbar_z_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
